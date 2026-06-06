@@ -7,13 +7,6 @@ import androidx.room.RoomDatabase
 import com.zaqueu.taskapp.data.local.dao.TaskDao
 import com.zaqueu.taskapp.data.local.entity.TaskEntity
 
-/**
- * Classe principal do banco de dados Room.
- *
- * Segue o padrão Singleton para garantir uma única instância em toda a aplicação.
- *
- * @property version Incrementar ao fazer alterações de esquema (migrations necessárias).
- */
 @Database(
     entities = [TaskEntity::class],
     version = 1,
@@ -29,10 +22,6 @@ abstract class TaskDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: TaskDatabase? = null
 
-        /**
-         * Retorna a instância única do banco, criando-a caso ainda não exista.
-         * O bloco `synchronized` garante segurança em acesso concorrente.
-         */
         fun getInstance(context: Context): TaskDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
